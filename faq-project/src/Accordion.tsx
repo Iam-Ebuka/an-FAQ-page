@@ -1,19 +1,21 @@
-
+import {useState} from "react"
 import plusSvg from './assets/plus.svg'
 import minusSvg from './assets/minus.svg'
 
 interface Props {
     question: string;
-    onClick: () => void;
-    active: boolean;
     sentence: string
 }
 
-function Accordion({ question, onClick, active, sentence }: Props) {
+function Accordion({ question, sentence }: Props) {
+    const [active, setActive] = useState<boolean>(false)
+    const handleClick = (): void => {
+        setActive(!active)
+    }
 
   return (
-    <div className='w-full'>
-        <div onClick={onClick} className='h-[80px] flex justify-between leading-5 items-center text-[14px] md:text-[16px] font-bold pr-4 pl-4'>
+    <div className='w-full cursor-pointer' onClick={handleClick}>
+        <div className='h-[80px] flex justify-between leading-5 items-center text-[14px] md:text-[16px] font-bold pr-4 pl-4'>
             <p className='w-[200px] sm:w-[100%]'>{question}</p>
             {active? (
             <div>
